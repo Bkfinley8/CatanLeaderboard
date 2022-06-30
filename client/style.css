@@ -1,0 +1,71 @@
+#adminPlayScreen {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    }
+    
+    #playerOne { 
+        grid-area: 1 / 1 / 2 / 2;
+        border-radius: 10px;
+        display: none;
+    }
+    #playerTwo {
+        grid-area: 1 / 2 / 2 / 3;
+        border-radius: 10px;
+        display: none;
+    }
+    #playerThree { 
+        grid-area: 1 / 3 / 2 / 4;
+        border-radius: 10px;
+        display: none;
+    }
+    #playerFour { 
+        grid-area: 2 / 1 / 3 / 2;
+        border-radius: 10px;
+        display: none;
+     }
+    #playerFive { 
+        grid-area: 2 / 2 / 3 / 3;
+        border-radius: 10px;
+        display: none;
+     }
+    #playerSix { 
+        grid-area: 2 / 3 / 3 / 4;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .settlementsGroup {
+        display: flex;
+        height: 16%;
+    }
+
+    .citiesGroup {
+        display: flex;
+        height: 16%;
+    }
+
+    .roadsGroup {
+        display: flex;
+        height: 16%;
+    }
+
+    .knightsGroup {
+        display: flex;
+        height: 16%;
+    }
+
+    .pointCount {
+        height: 16%;
+        text-align:center;
+        width: 100%;
+        margin-top: 0px;
+    }
+
+    .playerHeader {
+        text-align: center;
+        height: 16%;
+        margin-bottom: 0px;
+    }
