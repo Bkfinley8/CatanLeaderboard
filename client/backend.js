@@ -15,13 +15,16 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		this.adminClicked();
-		this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		setTimeout(this.addRoad, 2000, "Maxwell");
-		setTimeout(this.addRoad, 4100, "Maxwell");
-		setTimeout(this.addRoad, 6200, "Maxwell");
-		setTimeout(this.addRoad, 8300, "Maxwell");
-		// setTimeout(this.addCity, 5000, "Chloe");
+		// this.adminClicked();
+		// this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
+		// setTimeout(this.addKnight, 2200, "Maxwell");
+		// setTimeout(this.addKnight, 4300, "Maxwell");
+		// setTimeout(this.addKnight, 6400, "Maxwell");
+		// setTimeout(this.addKnight, 8500, "Maxwell");
+		// setTimeout(this.addRoad, 10600, "Maxwell");
+		// setTimeout(this.addRoad, 12700, "Maxwell");
+		// setTimeout(this.addRoad, 14800, "Maxwell");
+		// setTimeout(this.addRoad, 16900, "Maxwell");
 	}
 
 	onClose(evt) {
