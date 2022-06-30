@@ -15,8 +15,18 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		// this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		// setTimeout(this.addSettlement, 2000, "Chloe");
+		this.adminClicked();
+		this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
+		setTimeout(this.produce, 2000, "Maxwell", "wool");
+		setTimeout(this.produce, 3000, "Maxwell", "ore");
+		setTimeout(this.produce, 4000, "Maxwell", "wheat");
+		setTimeout(this.produce, 5000, "Maxwell", "wood");
+		setTimeout(this.produce, 6000, "Maxwell", "brick");
+		setTimeout(this.stopProducing, 7000, "Maxwell", "wool");
+		setTimeout(this.stopProducing, 8000, "Maxwell", "ore");
+		setTimeout(this.stopProducing, 9000, "Maxwell", "wheat");
+		setTimeout(this.stopProducing, 10000, "Maxwell", "wood");
+		setTimeout(this.stopProducing, 11000, "Maxwell", "brick");
 		// setTimeout(this.addCity, 5000, "Chloe");
 	}
 
@@ -61,6 +71,19 @@ class BackendConnection {
 	send(message) {
 		this.websocket.send(message);
 		console.log("->: " + message);
+	}
+
+
+	produce(name, what)
+	{
+		var message = {"request": "produce", "name": name, "what": what};
+        connection.send(JSON.stringify(message));
+	}
+
+	stopProducing(name, what)
+	{
+		var message = {"request": "stopProducing", "name": name, "what": what};
+        connection.send(JSON.stringify(message));
 	}
 
 	addSettlement(name)

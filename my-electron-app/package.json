@@ -1,0 +1,26 @@
+{
+  "name": "catan",
+  "version": "1.0.0",
+  "description": "Tech Hub catan",
+  "main": "entry.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maxfojtik/RapaDex.git"
+  },
+  "author": "Max Fojtik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maxfojtik/RapaDex/issues"
+  },
+  "homepage": "https://github.com/Maxfojtik/RapaDex#readme",
+  "devDependencies": {
+    "electron": "^15.4.0"
+  },
+  "dependencies": {
+    "websocket": "^1.0.34",
+    "ws": "^8.8.0"
+  }
+}
