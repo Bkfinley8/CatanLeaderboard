@@ -117,6 +117,22 @@ function updateNumbers()
 		$("#"+name+"-playercard .numCity").text(playerList[name]["cities"]);
 		$("#"+name+"-playercard .numRoad").text(playerList[name]["roads"]);
 		$("#"+name+"-playercard .victoryPoints").text(calculateVPforPlayer(name));
+		if(playerList[name]["largest"]["road"])
+		{
+			$("#"+name+"-playercard .largestRoadIcon").show();
+		}
+		else
+		{
+			$("#"+name+"-playercard .largestRoadIcon").hide();
+		}
+		if(playerList[name]["largest"]["army"])
+		{
+			$("#"+name+"-playercard .largestArmyIcon").show();
+		}
+		else
+		{
+			$("#"+name+"-playercard .largestArmyIcon").hide();
+		}
 	}
 }
 function updateRoad()
@@ -294,6 +310,30 @@ window.api.receive("message", (data) => {
 		playerList[message.name]["roads"]--;
 		broadcastFill();
 		updateRoad();
+		// updateScreen();
+		ignore(2000);
+	}
+	if(message.request=="addKnight")
+	{
+		var hadLargest = playerHasLargestArmy(message.name) || playerList[message.name]["largest"]["army"];
+		playerList[message.name]["knight"]++;
+		if(playerHasLargestArmy(message.name) && !hadLargest)
+		{
+			updateScreen();
+		}
+		else
+		{
+			updateNumbers();
+		}
+		broadcastFill();
+		// updateScreen();
+		ignore(2000);
+	}
+	if(message.request=="removeKnight")
+	{
+		playerList[message.name]["knight"]--;
+		broadcastFill();
+		updateNumbers();
 		// updateScreen();
 		ignore(2000);
 	}
