@@ -15,9 +15,9 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		setTimeout(this.addSettlement, 2000, "Chloe");
-		setTimeout(this.addCity, 5000, "Chloe");
+		// this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
+		// setTimeout(this.addSettlement, 2000, "Chloe");
+		// setTimeout(this.addCity, 5000, "Chloe");
 	}
 
 	onClose(evt) {
