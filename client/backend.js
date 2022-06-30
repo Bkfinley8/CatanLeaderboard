@@ -15,16 +15,10 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		// this.adminClicked();
-		// this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		// setTimeout(this.addKnight, 2200, "Maxwell");
-		// setTimeout(this.addKnight, 4300, "Maxwell");
-		// setTimeout(this.addKnight, 6400, "Maxwell");
-		// setTimeout(this.addKnight, 8500, "Maxwell");
-		// setTimeout(this.addRoad, 10600, "Maxwell");
-		// setTimeout(this.addRoad, 12700, "Maxwell");
-		// setTimeout(this.addRoad, 14800, "Maxwell");
-		// setTimeout(this.addRoad, 16900, "Maxwell");
+		document.getElementById('adminBtn').disabled = false;
+		// setTimeout(this.addCity, 5000, "Chloe");
+		this.adminClicked();
+        this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
 	}
 
 	onClose(evt) {
@@ -58,7 +52,7 @@ class BackendConnection {
 			console.log(message.playerDictionary);
 			fillAdminPage(message.playerDictionary);
 		}
-		
+
 	}
 
 	onError(evt) {
@@ -145,7 +139,7 @@ class BackendConnection {
         connection.send(JSON.stringify(message));
 	}
 
-	
+
 	addDevCard(name)
 	{
         var message = {"request": "addDevCard", "name": name};
@@ -167,7 +161,7 @@ class BackendConnection {
 	{
         connection.send(JSON.stringify({"request": "adminClicked"}));
     }
-	playerClicked() 
+	playerClicked()
 	{
 		connection.send(JSON.stringify({"request": "playerClicked"}));
 	}
