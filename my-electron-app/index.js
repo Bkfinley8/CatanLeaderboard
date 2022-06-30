@@ -115,8 +115,13 @@ function updateNumbers()
 		var name = names[i];
 		$("#"+name+"-playercard .numSettlement").text(playerList[name]["settlements"]);
 		$("#"+name+"-playercard .numCity").text(playerList[name]["cities"]);
+		$("#"+name+"-playercard .numRoad").text(playerList[name]["roads"]);
 		$("#"+name+"-playercard .victoryPoints").text(calculateVPforPlayer(name));
 	}
+}
+function updateRoad()
+{
+	updateNumbers();
 }
 function updateScreen()
 {
@@ -276,14 +281,30 @@ window.api.receive("message", (data) => {
 		updateScreen();
 		ignore(2000);
 	}
-	if(message.request=="claimKnight")
+	if(message.request=="addRoad")
 	{
-		playerList[message.name]["cities"]++;
-		playerList[message.name]["settlements"]--;
+		playerList[message.name]["roads"]++;
 		broadcastFill();
-		updateScreen();
+		updateRoad();
+		// updateScreen();
 		ignore(2000);
 	}
+	if(message.request=="removeRoad")
+	{
+		playerList[message.name]["roads"]--;
+		broadcastFill();
+		updateRoad();
+		// updateScreen();
+		ignore(2000);
+	}
+	// if(message.request=="claimKnight")
+	// {
+	// 	playerList[message.name]["cities"]++;
+	// 	playerList[message.name]["settlements"]--;
+	// 	broadcastFill();
+	// 	updateScreen();
+	// 	ignore(2000);
+	// }
 	if(message.request=="claimRoad")
 	{
 		playerList[message.name]["cities"]--;

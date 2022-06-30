@@ -17,16 +17,10 @@ class BackendConnection {
 		console.log("CONNECTED");
 		this.adminClicked();
 		this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		setTimeout(this.produce, 2000, "Maxwell", "wool");
-		setTimeout(this.produce, 3000, "Maxwell", "ore");
-		setTimeout(this.produce, 4000, "Maxwell", "wheat");
-		setTimeout(this.produce, 5000, "Maxwell", "wood");
-		setTimeout(this.produce, 6000, "Maxwell", "brick");
-		setTimeout(this.stopProducing, 7000, "Maxwell", "wool");
-		setTimeout(this.stopProducing, 8000, "Maxwell", "ore");
-		setTimeout(this.stopProducing, 9000, "Maxwell", "wheat");
-		setTimeout(this.stopProducing, 10000, "Maxwell", "wood");
-		setTimeout(this.stopProducing, 11000, "Maxwell", "brick");
+		setTimeout(this.addRoad, 2000, "Maxwell");
+		setTimeout(this.addRoad, 4100, "Maxwell");
+		setTimeout(this.addRoad, 6200, "Maxwell");
+		setTimeout(this.addRoad, 8300, "Maxwell");
 		// setTimeout(this.addCity, 5000, "Chloe");
 	}
 
