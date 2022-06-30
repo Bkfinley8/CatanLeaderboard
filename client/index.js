@@ -68,31 +68,67 @@ function fillAdminPage(dict){
             var card = document.getElementById("playerOne");
             document.getElementById("playerOneHeader").innerHTML = dict[x].name;
             document.getElementById("playerOnePoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerOneRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerOneRoad').src = "./icons/road.svg"
+            }
+
+            if(dict[x].largest.army) {
+
+            } else {
+
+            }
             card.style.display = 'block';
         } else if(color == "Blue"){
             var card = document.getElementById("playerTwo");
             document.getElementById("playerTwoHeader").innerHTML = dict[x].name;
             document.getElementById("playerTwoPoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerTwoRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerTwoRoad').src = "./icons/road.svg"
+            }
             card.style.display = 'block';
         } else if(color == "Green"){
             var card = document.getElementById("playerThree");
             document.getElementById("playerThreeHeader").innerHTML = dict[x].name;
             document.getElementById("playerThreePoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerThreeRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerThreeRoad').src = "./icons/road.svg"
+            }
             card.style.display = 'block';
         } else if(color == "Brown"){
             var card = document.getElementById("playerFour");
             document.getElementById("playerFourHeader").innerHTML = dict[x].name;
             document.getElementById("playerFourPoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerFourRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerFourRoad').src = "./icons/road.svg"
+            }
             card.style.display = 'block';
         } else if(color == "Orange"){
             var card = document.getElementById("playerFive");
             document.getElementById("playerFiveHeader").innerHTML = dict[x].name;
             document.getElementById("playerFivePoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerFiveRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerFiveRoad').src = "./icons/road.svg"
+            }
             card.style.display = 'block';
         } else if(color == "White"){
             var card = document.getElementById("playerSix");
             document.getElementById("playerSixHeader").innerHTML = dict[x].name;
             document.getElementById("playerSixPoint").innerHTML = calculateVPforPlayer(dict[x].name,dict);
+            if(dict[x].largest.road) {
+                document.getElementById('playerSixRoad').src = "./icons/roadShiny.svg"
+            } else {
+                document.getElementById('playerSixRoad').src = "./icons/road.svg"
+            }
             card.style.display = 'block';
         }
     }
@@ -240,6 +276,60 @@ function decreaseKnights(num){
         name = document.getElementById("playerSixHeader").innerHTML;
     } 
     connection.removeKnight(name)
+}
+
+function increaseDev(num){
+    var name = '';
+    if (num == 1) {
+        name = document.getElementById("playerOneHeader").innerHTML;
+    } else if (num == 2) {
+        name = document.getElementById("playerTwoHeader").innerHTML;
+    }  else if (num == 3) {
+        name = document.getElementById("playerThreeHeader").innerHTML;
+    }  else if (num == 4) {
+        name = document.getElementById("playerFourHeader").innerHTML;
+    }  else if (num == 5) {
+        name = document.getElementById("playerFiveHeader").innerHTML;
+    }  else if (num == 6) {
+        name = document.getElementById("playerSixHeader").innerHTML;
+    } 
+    connection.addDevCard(name)
+}
+
+function decreaseDev(num){
+    var name = '';
+    if (num == 1) {
+        name = document.getElementById("playerOneHeader").innerHTML;
+    } else if (num == 2) {
+        name = document.getElementById("playerTwoHeader").innerHTML;
+    }  else if (num == 3) {
+        name = document.getElementById("playerThreeHeader").innerHTML;
+    }  else if (num == 4) {
+        name = document.getElementById("playerFourHeader").innerHTML;
+    }  else if (num == 5) {
+        name = document.getElementById("playerFiveHeader").innerHTML;
+    }  else if (num == 6) {
+        name = document.getElementById("playerSixHeader").innerHTML;
+    } 
+    connection.removeDevCard(name)
+}
+
+function claimLongestRoad(num){
+    var name = '';
+    if (num == 1) {
+        name = document.getElementById("playerOneHeader").innerHTML;
+    } else if (num == 2) {
+        name = document.getElementById("playerTwoHeader").innerHTML;    
+    }  else if (num == 3) {
+        name = document.getElementById("playerThreeHeader").innerHTML;
+    }  else if (num == 4) {
+        name = document.getElementById("playerFourHeader").innerHTML;
+    }  else if (num == 5) {
+        name = document.getElementById("playerFiveHeader").innerHTML;
+    }  else if (num == 6) {
+        name = document.getElementById("playerSixHeader").innerHTML;
+    } 
+    connection.claimRoad(name);
 }
 
 function calculateVPforPlayer(name, playerList)

@@ -15,13 +15,10 @@ class BackendConnection {
 
 	onOpen(evt) {
 		console.log("CONNECTED");
-		this.adminClicked();
-		this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
-		setTimeout(this.addRoad, 2000, "Maxwell");
-		setTimeout(this.addRoad, 4100, "Maxwell");
-		setTimeout(this.addRoad, 6200, "Maxwell");
-		setTimeout(this.addRoad, 8300, "Maxwell");
+		document.getElementById('adminBtn').disabled = false;
 		// setTimeout(this.addCity, 5000, "Chloe");
+		this.adminClicked();
+        this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
 	}
 
 	onClose(evt) {
