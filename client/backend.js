@@ -37,7 +37,7 @@ class BackendConnection {
 		{
 			gotoAdminStartPage();
 		}
-		if(message.request=="gotoAdminPlayer")
+		if(message.request=="gotoAdminPlay")
 		{
 			gotoAdminPlayPage();
 		}
@@ -51,8 +51,9 @@ class BackendConnection {
 		}
 		if(message.request=="fill")
 		{
-			json in message.data
-			// gotoPlayerPlay();
+			//json in message.playerDictionary;
+			console.log(message.playerDictionary);
+			fillAdminPage(message.playerDictionary);
 		}
 		
 	}
@@ -101,11 +102,29 @@ class BackendConnection {
         connection.send(JSON.stringify(message));
 	}
 
-	claimKnight(name)
+	addKnight(name)
 	{
-        var message = {"request": "claimKnight", "name": name};
+        var message = {"request": "addKnight", "name": name};
         connection.send(JSON.stringify(message));
 	}
+
+	removeKnight(name)
+	{
+        var message = {"request": "removeKnight", "name": name};
+        connection.send(JSON.stringify(message));
+	}
+
+	addRoad(name)
+	{
+        var message = {"request": "addRoad", "name": name};
+        connection.send(JSON.stringify(message));
+	}
+	removeRoad(name)
+	{
+        var message = {"request": "removeRoad", "name": name};
+        connection.send(JSON.stringify(message));
+	}
+
 	claimRoad(name)
 	{
         var message = {"request": "claimRoad", "name": name};
