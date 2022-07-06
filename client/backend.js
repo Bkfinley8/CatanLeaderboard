@@ -17,8 +17,8 @@ class BackendConnection {
 		console.log("CONNECTED");
 		document.getElementById('adminBtn').disabled = false;
 		// setTimeout(this.addCity, 5000, "Chloe");
-		this.adminClicked();
-        this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
+		//this.adminClicked();
+        //this.startGame([{"name":"Maxwell","color":"Blue"},{"name":"Chloe","color":"White"},{"name":"Donovan","color":"Red"},{"name":"Cory","color":"Orange"},{"name":"Johnathan","color":"Brown"},{"name":"Zach","color":"Green"}]);
 	}
 
 	onClose(evt) {
