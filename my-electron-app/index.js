@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 	
 });
-function generatePlayerCard(name, color, largest, citys, settlements, roads)
+function generatePlayerCard(name, color, largest, citys, settlements, roads, knights, hiddenCards, vpCards)
 {
 	var cardHTML = "<div class='playerCard' style='border-color: "+color+"; visibility: hidden' id='"+name+"-playercard'>";
 	// cardHTML += "<div class='playerIconContainer'><img src='playericons/"+name+".svg' width=150 height=150 class='playerIcon'></img></div>";
@@ -10,17 +10,18 @@ function generatePlayerCard(name, color, largest, citys, settlements, roads)
 	cardHTML += "<div class='playerProduction'></div>"
 	cardHTML += "<div class='largestIcons'><img src='road.svg' width=75 height=75 class='largestRoadIcon' style='display:"+(largest["army"] ? "block;" : "none;")+"'></img><img src='sword.svg' width=75 height=75 class='largestArmyIcon' style='display:"+(largest["road"] ? "block;" : "none;")+";></img></div>";
 	cardHTML += "<div class='victoryPointsContainer'><img src='victory.svg' width=60 height=60 class='victoryIcon'></img><h1 class='victoryPoints'>"+calculateVPforPlayer(name)+"</h1></div>";
-	cardHTML += "<div class='inventory'><img src='house.svg' width=25 height=25 class='settlementIcon'><h1 class='numSettlement'>"+settlements+"</h1></img><img src='city.svg' width=25 height=25 class='cityIcon'><h1 class='numCity'>"+citys+"</h1><img src='road.svg' width=25 height=25 class='roadIcon'><h1 class='numRoad'>"+roads+"</h1></div>";
+	cardHTML += "<div class='inventory'><img src='house.svg' width=25 height=25 class='settlementIcon'><h1 class='numSettlement'>"+settlements+"</h1></img><img src='city.svg' width=25 height=25 class='cityIcon'><h1 class='numCity'>"+citys+"</h1><img src='road.svg' width=25 height=25 class='roadIcon'><h1 class='numRoad'>"+roads+"</h1>"
+	+ "<img src='sword.svg' width=25 height=25 class='armyIcon'><h1 class='numArmy'>"+knights+"</h1></img><img src='devCard.svg' width=25 height=25 class='cardIcon'><h1 class='numHiddenCards'>"+hiddenCards+"</h1><img src='victory.svg' width=25 height=25 class='VPSmall'><h1 class='numVPCards'>"+vpCards+"</h1></div>";
 	cardHTML += "</div>";
 	return cardHTML;
 }
-function appendPlayerToDOM(name, color, largest, citys, settlements, roads)
+function appendPlayerToDOM(name, color, largest, citys, settlements, roads, knights, hiddenCards, vpCards)
 {
 	if(color=="White")
 	{
 		color = "Black";
 	}
-	var html = generatePlayerCard(name, color, largest, citys, settlements, roads);
+	var html = generatePlayerCard(name, color, largest, citys, settlements, roads, knights, hiddenCards, vpCards);
 	$("#gameScreen").append(html);
 	$("#"+name+"-icon").on("load", function() {
 		$(this.contentDocument).find("svg").css("fill", color);
@@ -116,6 +117,9 @@ function updateNumbers()
 		$("#"+name+"-playercard .numSettlement").text(playerList[name]["settlements"]);
 		$("#"+name+"-playercard .numCity").text(playerList[name]["cities"]);
 		$("#"+name+"-playercard .numRoad").text(playerList[name]["roads"]);
+		$("#"+name+"-playercard .numArmy").text(playerList[name]["knights"]);
+		$("#"+name+"-playercard .numHiddenCards").text(playerList[name]["devCards"]);
+		$("#"+name+"-playercard .numVPCards").text(playerList[name]["vpFromDevCards"]);
 		$("#"+name+"-playercard .victoryPoints").text(calculateVPforPlayer(name));
 		if(playerList[name]["largest"]["road"])
 		{
@@ -222,6 +226,28 @@ function broadcastFill()
 {
 	window.api.send("send", JSON.stringify({"message": {"request": "fill", "playerDictionary": playerList}, "session": "broadcast"}));
 }
+function playerHasLargestArmy(n)
+{
+	var currentLargest = 0;
+	for(var name in playerList)
+	{
+		if(playerList[name].knights>currentLargest && name!=n)
+		{
+			currentLargest = playerList[name].knights;
+		}
+	}
+	return playerList[n].knights > currentLargest && playerList[n].knights>2;
+}
+function removeLargestFromEveryoneExcept(n)
+{
+	for(var name in playerList)
+	{
+		if(n!=name)
+		{
+			playerList[name]["largest"]["army"] = false;
+		}
+	}
+}
 var playerList;
 var ignoring = false;
 var admin;
@@ -251,7 +277,7 @@ window.api.receive("message", (data) => {
 			player.vpFromDevCards = 0;
 			player.largest = {};
 			player.production = [];
-			appendPlayerToDOM(player.name, player.color, player.largest, player.cities, player.settlements, player.roads);
+			appendPlayerToDOM(player.name, player.color, player.largest, player.cities, player.settlements, player.roads, player.knights, player.devCards, player.vpFromDevCards);
 		}
 		sortPlayersAndDisplay(100);
 		window.api.send("send", JSON.stringify({"message": {"request": "fill", "playerDictionary": playerList}, "session": admin}));
@@ -316,9 +342,13 @@ window.api.receive("message", (data) => {
 	if(message.request=="addKnight")
 	{
 		var hadLargest = playerHasLargestArmy(message.name) || playerList[message.name]["largest"]["army"];
-		playerList[message.name]["knight"]++;
+		playerList[message.name]["knights"]++;
+		playerList[message.name]["devCards"]--;
+		var nowHasLargest = playerHasLargestArmy(message.name);
+		playerList[message.name]["largest"]["army"] = nowHasLargest;//can remove if they lost it
 		if(playerHasLargestArmy(message.name) && !hadLargest)
 		{
+			removeLargestFromEveryoneExcept(message.name);
 			updateScreen();
 		}
 		else
@@ -331,9 +361,20 @@ window.api.receive("message", (data) => {
 	}
 	if(message.request=="removeKnight")
 	{
-		playerList[message.name]["knight"]--;
+		var hadLargest = playerHasLargestArmy(message.name) || playerList[message.name]["largest"]["army"];
+		playerList[message.name]["knights"]--;
+		playerList[message.name]["devCards"]++;
+		var nowHasLargest = playerHasLargestArmy(message.name);
+		playerList[message.name]["largest"]["army"] = nowHasLargest;//can remove if they lost it
+		if(nowHasLargest && !hadLargest)
+		{
+			updateScreen();
+		}
+		else
+		{
+			updateNumbers();
+		}
 		broadcastFill();
-		updateNumbers();
 		// updateScreen();
 		ignore(2000);
 	}
@@ -347,8 +388,11 @@ window.api.receive("message", (data) => {
 	// }
 	if(message.request=="claimRoad")
 	{
-		playerList[message.name]["cities"]--;
-		playerList[message.name]["settlements"]++;
+		for(var name in playerList)
+		{
+			playerList[name]["largest"]["road"] = false;
+		}
+		playerList[message.name]["largest"]["road"] = true;
 		broadcastFill();
 		updateScreen();
 		ignore(2000);
@@ -371,18 +415,16 @@ window.api.receive("message", (data) => {
 	}
 	if(message.request=="addDevCard")
 	{
-		playerList[message.name]["cities"]++;
-		playerList[message.name]["settlements"]--;
+		playerList[message.name]["devCards"]++;
 		broadcastFill();
-		updateScreen();
+		updateNumbers();
 		ignore(2000);
 	}
 	if(message.request=="removeDevCard")
 	{
-		playerList[message.name]["cities"]--;
-		playerList[message.name]["settlements"]++;
+		playerList[message.name]["devCards"]--;
 		broadcastFill();
-		updateScreen();
+		updateNumbers();
 		ignore(2000);
 	}
 	if(message.request=="produce")
