@@ -64,6 +64,9 @@
       </table>
    </div>
    <div id="adminPlayScreen" style = "display: none;">
+      <div id="roll">
+         <button type="button" onclick="connection.roll()">Roll Dice</button>
+      </div>
       <div id="playerOne" style="border-style:solid; border-color: red;background-color: #ff9f9f;">
          <h1 id="playerOneHeader" class="playerHeader">Red Player</h1>
          <div class = "pointCount">
@@ -90,9 +93,14 @@
             <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(1)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(1)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(1)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(1)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(1)">+</button>
+         </div>
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(1)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(1)">+</button>
          </div>
          <div id = "playerOneProd" class = "production">
             <img id = 'playerOneWoolOn' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'wool')"></img>
@@ -106,7 +114,6 @@
             <img id = 'playerOneOreOn' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'ore')"></img>
             <img id = 'playerOneOreOff' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'ore')"></img>
          </div>
-
       </div>
       <div id="playerTwo" style="border-style:solid;border-color: Blue;background-color: #6161ff;">
          <h1 id="playerTwoHeader"  class="playerHeader">Blue Player</h1> 
@@ -134,9 +141,14 @@
             <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(2)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(2)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(2)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(2)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(2)">+</button>
+         </div>
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(2)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(2)">+</button>
          </div>
          <div id = "playerTwoProd" class = "production">
             <img id = 'playerTwoWoolOn' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'wool')"></img>
@@ -177,9 +189,14 @@
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(3)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(3)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(3)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(3)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(3)">+</button>
+         </div>
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(3)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(3)">+</button>
          </div>
          <div id = "playerThreeProd" class = "production">
             <img id = 'playerThreeWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'wool')"></img>
@@ -220,9 +237,14 @@
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(4)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(4)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(4)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(4)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(4)">+</button>
+         </div>
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(4)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(4)">+</button>
          </div>
          <div id = "playerFourProd" class = "production">
             <img id = 'playerFourWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'wool')"></img>
@@ -263,10 +285,15 @@
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(5)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(5)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(5)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(5)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(5)">+</button>
          </div> 
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(5)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(5)">+</button>
+         </div>
          <div id = "playerFiveProd" class = "production">
             <img id = 'playerFiveWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'wool')"></img>
             <img id = 'playerFiveWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'wool')"></img>
@@ -306,10 +333,15 @@
             <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseKnights(6)">+</button>
          </div>
          <div class = "devCardGroup">
-            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-left: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(6)">-</button>
-            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
-            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-right: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(6)">+</button>
+            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-left: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="decreaseDev(6)">-</button>
+            <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;border-bottom: none"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-right: none;font-size: 25px;font-weight: bold;border-bottom: none" onclick="increaseDev(6)">+</button>
          </div> 
+         <div class = "scoreCardGroup">
+            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDevScore(6)">-</button>
+            <img src="./icons/victory.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
+            <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDevScore(6)">+</button>
+         </div>
          <div id = "playerSixProd" class = "production">
             <img id = 'playerSixWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'wool')"></img>
             <img id = 'playerSixWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'wool')"></img>

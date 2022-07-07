@@ -300,6 +300,7 @@ window.api.receive("message", (data) => {
 		else
 		{
 			window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminPlay"}, "session": message.session}));
+			broadcastFill();
 		}
 	}
 	if(message.request=="playerClicked")

@@ -1,6 +1,7 @@
 
 // var wsUri = "ws://localhost:8080"; // Localhost
 var wsUri = "ws://192.168.1.47:8080"; // Max's
+var wsUri = "ws://192.168.56.1:8080"; // Brennan
 
 class BackendConnection {
 	constructor() {
@@ -49,7 +50,7 @@ class BackendConnection {
 		if(message.request=="fill")
 		{
 			//json in message.playerDictionary;
-			console.log(message.playerDictionary);
+			//console.log(message.playerDictionary);
 			fillAdminPage(message.playerDictionary);
 		}
 		

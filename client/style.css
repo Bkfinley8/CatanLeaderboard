@@ -4,57 +4,65 @@
     grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 6px;
     grid-row-gap: 6px;
+    width: 90;
+    height: 90;
     }
     
     #playerOne { 
         grid-area: 1 / 1 / 2 / 2;
         border-radius: 10px;
         display: none;
+        height: 50vh;
     }
     #playerTwo {
         grid-area: 1 / 2 / 2 / 3;
         border-radius: 10px;
         display: none;
+        height: 50vh;
     }
     #playerThree { 
         grid-area: 1 / 3 / 2 / 4;
         border-radius: 10px;
         display: none;
+        height: 50vh;
     }
     #playerFour { 
         grid-area: 2 / 1 / 3 / 2;
         border-radius: 10px;
         display: none;
+        height: 50vh;
      }
     #playerFive { 
         grid-area: 2 / 2 / 3 / 3;
         border-radius: 10px;
         display: none;
+        height: 50vh;
      }
     #playerSix { 
         grid-area: 2 / 3 / 3 / 4;
         border-radius: 10px;
         display: none;
+        height: 50vh;
     }
 
     .settlementsGroup {
         display: flex;
-        height: 14%;
+        height: 12%;
     }
 
     .citiesGroup {
         display: flex;
-        height: 14%;
+        height: 12%;
     }
 
     .roadsGroup {
         display: flex;
-        height: 14%;
+        height: 12%;
     }
 
     .knightsGroup {
         display: flex;
-        height: 14%;
+        height: 12%;
     }
 
     .pointCount {
@@ -66,13 +74,18 @@
 
     .playerHeader {
         text-align: center;
-        height: 10%;
+        height: 8%;
         margin-bottom: 0px;
     }
 
     .devCardGroup{
         display: flex;
-        height: 14%;
+        height: 12%;
+    }
+
+    .scoreCardGroup{
+        display: flex;
+        height: 12%;
     }
 
     #launchPage{
