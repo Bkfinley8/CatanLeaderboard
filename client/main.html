@@ -95,11 +95,16 @@
             <button type="button" style = "width: 45%;height:100%;background-color: #FF9F9F;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(1)">+</button>
          </div>
          <div id = "playerOneProd" class = "production">
-            <img src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;"></img>
-            <img src = "./icons/wheat.svg" style = "width: 20%;margin-top: 4px;"></img>
-            <img src = "./icons/wood.svg" style = "width: 20%;margin-top: 4px;"></img>
-            <img src = "./icons/brick.svg" style = "width: 20%;margin-top: 4px;"></img>
-            <img src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;"></img>
+            <img id = 'playerOneWoolOn' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'wool')"></img>
+            <img id = 'playerOneWoolOff' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'wool')"></img>
+            <img id = 'playerOneWheatOn' src = "./icons/wheat.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'wheat')"></img>
+            <img id = 'playerOneWheatOff' src = "./icons/wheat.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'wheat')"></img>
+            <img id = 'playerOneWoodOn' src = "./icons/wood.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'wood')"></img>
+            <img id = 'playerOneWoodOff' src = "./icons/wood.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'wood')"></img>
+            <img id = 'playerOneBrickOn' src = "./icons/brick.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'brick')"></img>
+            <img id = 'playerOneBrickOff'src = "./icons/brick.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'brick')"></img>
+            <img id = 'playerOneOreOn' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(1,'ore')"></img>
+            <img id = 'playerOneOreOff' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(1,'ore')"></img>
          </div>
 
       </div>
@@ -133,6 +138,18 @@
             <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
             <button type="button" style = "width: 45%;height:100%;background-color: #6161ff;border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(2)">+</button>
          </div>
+         <div id = "playerTwoProd" class = "production">
+            <img id = 'playerTwoWoolOn' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'wool')"></img>
+            <img id = 'playerTwoWoolOff' src = "./icons/wool.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(2,'wool')"></img>
+            <img id = 'playerTwoWheatOn' src = "./icons/wheat.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'wheat')"></img>
+            <img id = 'playerTwoWheatOff' src = "./icons/wheat.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(2,'wheat')"></img>
+            <img id = 'playerTwoWoodOn' src = "./icons/wood.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'wood')"></img>
+            <img id = 'playerTwoWoodOff' src = "./icons/wood.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(2,'wood')"></img>
+            <img id = 'playerTwoBrickOn' src = "./icons/brick.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'brick')"></img>
+            <img id = 'playerTwoBrickOff'src = "./icons/brick.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(2,'brick')"></img>
+            <img id = 'playerTwoOreOn' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:block" onclick = "produce(2,'ore')"></img>
+            <img id = 'playerTwoOreOff' src = "./icons/ore.svg" style = "width: 20%;margin-top: 4px;display:none" onclick = "notProduce(2,'ore')"></img>
+         </div>
       </div>
       <div id="playerThree" style="border-style:solid;border-color: Green;background-color: rgb(105, 214, 105);">
          <h1 id="playerThreeHeader" class="playerHeader">Green Player</h1>
@@ -163,6 +180,18 @@
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-left: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(3)">-</button>
             <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(105, 214, 105);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(3)">+</button>
+         </div>
+         <div id = "playerThreeProd" class = "production">
+            <img id = 'playerThreeWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'wool')"></img>
+            <img id = 'playerThreeWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(3,'wool')"></img>
+            <img id = 'playerThreeWheatOn' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'wheat')"></img>
+            <img id = 'playerThreeWheatOff' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(3,'wheat')"></img>
+            <img id = 'playerThreeWoodOn' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'wood')"></img>
+            <img id = 'playerThreeWoodOff' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(3,'wood')"></img>
+            <img id = 'playerThreeBrickOn' src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'brick')"></img>
+            <img id = 'playerThreeBrickOff'src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(3,'brick')"></img>
+            <img id = 'playerThreeOreOn' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(3,'ore')"></img>
+            <img id = 'playerThreeOreOff' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(3,'ore')"></img>
          </div>
       </div>
       <div id="playerFour" style="border-style:solid;border-color: Brown;background-color: rgb(165, 116, 116);">
@@ -195,6 +224,18 @@
             <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(165, 116, 116);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(4)">+</button>
          </div>
+         <div id = "playerFourProd" class = "production">
+            <img id = 'playerFourWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'wool')"></img>
+            <img id = 'playerFourWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(4,'wool')"></img>
+            <img id = 'playerFourWheatOn' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'wheat')"></img>
+            <img id = 'playerFourWheatOff' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(4,'wheat')"></img>
+            <img id = 'playerFourWoodOn' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'wood')"></img>
+            <img id = 'playerFourWoodOff' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(4,'wood')"></img>
+            <img id = 'playerFourBrickOn' src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'brick')"></img>
+            <img id = 'playerFourBrickOff'src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(4,'brick')"></img>
+            <img id = 'playerFourOreOn' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(4,'ore')"></img>
+            <img id = 'playerFourOreOff' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(4,'ore')"></img>
+         </div>
       </div>
       <div id="playerFive" style="border-style:solid;border-color: orange;background-color: rgb(255, 211, 129);">
          <h1 id="playerFiveHeader"  class="playerHeader">Orange Player</h1>
@@ -226,6 +267,18 @@
             <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
             <button type="button" style = "width: 45%;height:100%;background-color: rgb(255, 211, 129);border-right: none;font-size: 25px;font-weight: bold;" onclick="increaseDev(5)">+</button>
          </div> 
+         <div id = "playerFiveProd" class = "production">
+            <img id = 'playerFiveWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'wool')"></img>
+            <img id = 'playerFiveWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'wool')"></img>
+            <img id = 'playerFiveWheatOn' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'wheat')"></img>
+            <img id = 'playerFiveWheatOff' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'wheat')"></img>
+            <img id = 'playerFiveWoodOn' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'wood')"></img>
+            <img id = 'playerFiveWoodOff' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'wood')"></img>
+            <img id = 'playerFiveBrickOn' src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'brick')"></img>
+            <img id = 'playerFiveBrickOff'src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'brick')"></img>
+            <img id = 'playerFiveOreOn' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(5,'ore')"></img>
+            <img id = 'playerFiveOreOff' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(5,'ore')"></img>
+         </div>
       </div>
       <div id="playerSix" style="border-style:solid;border-color: black;">
          <h1 id="playerSixHeader"  class="playerHeader">White Player</h1>
@@ -257,6 +310,20 @@
             <img src="./icons/devCard.svg" style = "width: 10%;padding:2px;border-style: solid;border-radius:1px;border-left:none;border-right:none;"></img>
             <button type="button" style = "width: 45%;height:100%;background-color: #ffffff;border-right: none;font-size: 25px;font-weight: bold;" onclick="decreaseDev(6)">+</button>
          </div> 
+         <div id = "playerSixProd" class = "production">
+            <img id = 'playerSixWoolOn' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'wool')"></img>
+            <img id = 'playerSixWoolOff' src = "./icons/wool.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'wool')"></img>
+            <img id = 'playerSixWheatOn' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'wheat')"></img>
+            <img id = 'playerSixWheatOff' src = "./icons/wheat.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'wheat')"></img>
+            <img id = 'playerSixWoodOn' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'wood')"></img>
+            <img id = 'playerSixWoodOff' src = "./icons/wood.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'wood')"></img>
+            <img id = 'playerSixBrickOn' src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'brick')"></img>
+            <img id = 'playerSixBrickOff'src = "./icons/brick.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'brick')"></img>
+            <img id = 'playerSixOreOn' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:block" onclick = "produce(6,'ore')"></img>
+            <img id = 'playerSixOreOff' src = "./icons/ore.svg" style = "width: 30%;margin-top: 4px;display:none" onclick = "notProduce(6,'ore')"></img>
+         </div>
+
+
       </div>
    </div>
 </body>
