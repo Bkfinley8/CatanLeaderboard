@@ -192,29 +192,33 @@ function generateProductionIcon(what, position, total)
 function showProduceIcon(who, what)
 {
 	// console.log(playerList);
-	if(!playerList[who]["production"].includes(what))
+	if(!playerList[who]["production"][what])
 	{
-		playerList[who]["production"].push(what);
+		playerList[who]["production"][what] = true;
 	}
 	$("#"+who+"-playercard .playerProduction").empty();
-	for(var i = 0; i < playerList[who]["production"].length; i++)
+	var i = 0;
+	for(var resource in playerList[who]["production"])
 	{
-		var htmlIcon = generateProductionIcon(playerList[who]["production"][i], i, playerList[who]["production"].length);
+		var htmlIcon = generateProductionIcon(resource, i, Object.keys(playerList[who]["production"]).length);
 		$("#"+who+"-playercard .playerProduction").append(htmlIcon);
+		i++
 	}
 }
 function removeProduceIcon(who, what)
 {
 	// console.log(playerList);
-	const index = playerList[who]["production"].indexOf(what);
-	if (index > -1) { // only splice array when item is found
-		playerList[who]["production"].splice(index, 1); // 2nd parameter means remove one item only
+	// const index = playerList[who]["production"].indexOf(what);
+	if (playerList[who]["production"][what]) { 
+		delete playerList[who]["production"][what];
 	}
 	$("#"+who+"-playercard .playerProduction").empty();
-	for(var i = 0; i < playerList[who]["production"].length; i++)
+	var i = 0;
+	for(var resource in playerList[who]["production"])
 	{
-		var htmlIcon = generateProductionIcon(playerList[who]["production"][i], i, playerList[who]["production"].length);
+		var htmlIcon = generateProductionIcon(resource, i, Object.keys(playerList[who]["production"]).length);
 		$("#"+who+"-playercard .playerProduction").append(htmlIcon);
+		i++
 	}
 }
 function ignore(time)
@@ -262,6 +266,8 @@ window.api.receive("message", (data) => {
 	if(message.request=="startGame")
 	{
 		playerList = {};
+		gameStarted = true;
+		$("#gameScreen").empty();
 		for(var i = 0; i < message.playerList.length; i++)
 		{
 			playerList[message.playerList[i].name] = {};
@@ -276,18 +282,25 @@ window.api.receive("message", (data) => {
 			player.devCards = 0;
 			player.vpFromDevCards = 0;
 			player.largest = {};
-			player.production = [];
+			player.production = {};
 			appendPlayerToDOM(player.name, player.color, player.largest, player.cities, player.settlements, player.roads, player.knights, player.devCards, player.vpFromDevCards);
 		}
-		sortPlayersAndDisplay(100);
+		sortPlayersAndDisplay(1000);
 		window.api.send("send", JSON.stringify({"message": {"request": "fill", "playerDictionary": playerList}, "session": admin}));
 		window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminPlay"}, "session": admin}));
-		ignore(1000);
+		ignore(6000);
 	}
 	if(message.request=="adminClicked")
 	{
-		window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminWait"}, "session": message.session}));
-		admin = message.session;
+		if(!gameStarted)
+		{
+			window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminWait"}, "session": message.session}));
+			admin = message.session;
+		}
+		else
+		{
+			window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminPlay"}, "session": message.session}));
+		}
 	}
 	if(message.request=="playerClicked")
 	{
@@ -329,7 +342,7 @@ window.api.receive("message", (data) => {
 		broadcastFill();
 		updateRoad();
 		// updateScreen();
-		ignore(2000);
+		// ignore(2000);
 	}
 	if(message.request=="removeRoad")
 	{
@@ -337,7 +350,7 @@ window.api.receive("message", (data) => {
 		broadcastFill();
 		updateRoad();
 		// updateScreen();
-		ignore(2000);
+		// ignore(2000);
 	}
 	if(message.request=="addKnight")
 	{
