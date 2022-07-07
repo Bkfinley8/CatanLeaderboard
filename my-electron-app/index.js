@@ -92,6 +92,7 @@ function sortPlayersAndDisplay(time)
 		setTimeout(showPlayer, i*time, names[i]);
 	}
 }
+var timerToSortPlayers = -1;
 function hidePlayers()
 {
 	var elements = $(".playerCard > .playerName");
@@ -101,9 +102,19 @@ function hidePlayers()
 	for(var i = 0; i < names.length; i++)
 	{
 		var name = names[i];
-		$("#"+name+"-playercard").delay(i*100).fadeOut(100, function() {$(this).css("visibility", "hidden"); $(this).show()});
+		$("#"+name+"-playercard").delay(i*100).fadeOut(100, function() {
+			$(this).css("visibility", "hidden"); 
+			$(this).show();
+			if(timerToSortPlayers >= 0)
+			{
+				clearTimeout(timerToSortPlayers);
+				timerToSortPlayers = -1;
+				timerToSortPlayers = setTimeout(sortPlayersAndDisplay, 100, 100);
+			}
+		});
 		// setTimeout((n) => {$("#"+n+"-playercard").css("visibility", "hidden"); $("#"+n+"-playercard").show(); console.log(n)}, i*200+200, name);
 	}
+	timerToSortPlayers = setTimeout(sortPlayersAndDisplay, names.length*100+100, 100);
 }
 function updateNumbers()
 {
@@ -152,7 +163,6 @@ function updateScreen()
 		return $(this).text();
 	}).get();
 	setTimeout(updateNumbers, names.length*100+100);
-	setTimeout(sortPlayersAndDisplay, names.length*100+100, 100);
 }
 function generateProductionIcon(what, position, total)
 {
@@ -275,7 +285,7 @@ window.api.receive("message", (data) => {
 			// console.log(player);
 			player.name = message.playerList[i].name;
 			player.color = message.playerList[i].color;
-			player.roads = 2;
+			player.roads = 1;
 			player.settlements = 2;
 			player.cities = 0;
 			player.knights = 0;
@@ -300,11 +310,20 @@ window.api.receive("message", (data) => {
 		else
 		{
 			window.api.send("send", JSON.stringify({"message": {"request": "gotoAdminPlay"}, "session": message.session}));
+			window.api.send("send", JSON.stringify({"message": {"request": "fill", "playerDictionary": playerList}, "session": message.session}));
 		}
 	}
 	if(message.request=="playerClicked")
 	{
-		window.api.send("send", JSON.stringify({"message": {"request": "gotoPlayerWait"}, "session": message.session}));
+		if(!gameStarted)
+		{
+			window.api.send("send", JSON.stringify({"message": {"request": "gotoPlayerWait"}, "session": message.session}));
+		}
+		else
+		{
+			window.api.send("send", JSON.stringify({"message": {"request": "gotoPlayerPlay"}, "session": message.session}));
+			window.api.send("send", JSON.stringify({"message": {"request": "fill", "playerDictionary": playerList}, "session": message.session}));
+		}
 	}
 	if(message.request=="addSettlement")
 	{
@@ -359,10 +378,11 @@ window.api.receive("message", (data) => {
 		playerList[message.name]["devCards"]--;
 		var nowHasLargest = playerHasLargestArmy(message.name);
 		playerList[message.name]["largest"]["army"] = nowHasLargest;//can remove if they lost it
-		if(playerHasLargestArmy(message.name) && !hadLargest)
+		if(nowHasLargest && !hadLargest)
 		{
 			removeLargestFromEveryoneExcept(message.name);
 			updateScreen();
+			ignore(2000);
 		}
 		else
 		{
@@ -370,7 +390,6 @@ window.api.receive("message", (data) => {
 		}
 		broadcastFill();
 		// updateScreen();
-		ignore(2000);
 	}
 	if(message.request=="removeKnight")
 	{
@@ -381,15 +400,17 @@ window.api.receive("message", (data) => {
 		playerList[message.name]["largest"]["army"] = nowHasLargest;//can remove if they lost it
 		if(nowHasLargest && !hadLargest)
 		{
+			removeLargestFromEveryoneExcept("");
 			updateScreen();
+			ignore(2000);
 		}
 		else
 		{
 			updateNumbers();
+			// ignore(2000);
 		}
 		broadcastFill();
 		// updateScreen();
-		ignore(2000);
 	}
 	// if(message.request=="claimKnight")
 	// {
