@@ -56,6 +56,7 @@ function gotoAdminStartPage(){
 }
 
 function gotoAdminPlayPage(){
+    document.getElementById("launchPage").style.display = 'none';
     document.getElementById("startGameAdminPage").style.display = 'none';
     document.getElementById("adminPlayScreen").style.display = 'grid';
 }
@@ -628,6 +629,42 @@ function notProduce(num,what){
         name = document.getElementById("playerSixHeader").innerHTML;
     } 
     connection.stopProducing(name,what);
+}
+
+function decreaseDevScore(num){
+    var name = '';
+    if (num == 1) {
+        name = document.getElementById("playerOneHeader").innerHTML;
+    } else if (num == 2) {
+        name = document.getElementById("playerTwoHeader").innerHTML;    
+    }  else if (num == 3) {
+        name = document.getElementById("playerThreeHeader").innerHTML;
+    }  else if (num == 4) {
+        name = document.getElementById("playerFourHeader").innerHTML;
+    }  else if (num == 5) {
+        name = document.getElementById("playerFiveHeader").innerHTML;
+    }  else if (num == 6) {
+        name = document.getElementById("playerSixHeader").innerHTML;
+    } 
+    //connection.decreaseVP(name);
+}
+
+function increaseDevScore(num){
+    var name = '';
+    if (num == 1) {
+        name = document.getElementById("playerOneHeader").innerHTML;
+    } else if (num == 2) {
+        name = document.getElementById("playerTwoHeader").innerHTML;    
+    }  else if (num == 3) {
+        name = document.getElementById("playerThreeHeader").innerHTML;
+    }  else if (num == 4) {
+        name = document.getElementById("playerFourHeader").innerHTML;
+    }  else if (num == 5) {
+        name = document.getElementById("playerFiveHeader").innerHTML;
+    }  else if (num == 6) {
+        name = document.getElementById("playerSixHeader").innerHTML;
+    } 
+    //connection.increaseVP(name);
 }
 
 playerList = [];
