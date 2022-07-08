@@ -11,7 +11,7 @@
 <body>
    <div id="launchPage" style = "display:block;">
       <button id ="adminBtn" type="button" class="btn btn-primary" disabled onclick="connection.adminClicked()" >Admin</button>
-      <button type="button" class="btn btn-primary" onclick="addPlayer()">PLayer</button>
+      <button type="button" class="btn btn-primary" onclick="connection.playerClicked()">PLayer</button>
    </div>
    <div  id="startGameAdminPage" style = "margin-top:10px;text-align:center;display:none;">
       <div style="display:flex;text-align:center;justify-content:space-between;align-items: center;width:60%;margin-left:auto;margin-right:auto">
@@ -62,6 +62,15 @@
          <tbody id = "playerListBody">
          </tbody>
       </table>
+   </div>
+   <div id = "playerPlayPage" style = "display: none;">
+      <div id = "playerSelect" style = "display: block">
+         <h1>Select Player</h1>
+         <select name="players" id="playerField">
+
+         </select>
+         <button id='playBtn'>Play</button>
+      </div>
    </div>
    <div id="adminPlayScreen" style = "display: none;">
       <div id="roll">

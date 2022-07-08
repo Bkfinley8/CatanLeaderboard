@@ -56,7 +56,7 @@ class BackendConnection {
 		{
 			//json in message.playerDictionary;
 			//console.log(message.playerDictionary);
-			fillAdminPage(message.playerDictionary);
+			fill(message.playerDictionary);
 		}
 		
 	}
