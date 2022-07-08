@@ -6,14 +6,23 @@ const fs = require("fs");
 const crypto = require("crypto");
 var win;
 var WebSocketServer = require('websocket').server;
-var http = require('http');
+const http = require('http');
 const { connect } = require('http2');
 const { connection } = require('websocket');
 
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
+    fs.promises.readFile("C:/Users/Maxwell/Documents/GitHub/CatanLeaderboard/client"+request.url)
+    .then(contents => {
+        response.setHeader("Content-Type", "text/html");
+        response.writeHead(200);
+        response.end(contents);
+    }).catch(err => {
+        console.error(`Could not read index.html file: ${err}`);
+        // res.setHeader("Content-Type", "text/html");
+        response.writeHead(404);
+        response.end("cant find");
+    });
 });
 server.listen(8080, function() {
     console.log((new Date()) + ' Server is listening on port 8080');
@@ -21,11 +30,6 @@ server.listen(8080, function() {
 
 wsServer = new WebSocketServer({
     httpServer: server,
-    // You should not use autoAcceptConnections for production
-    // applications, as it defeats all standard cross-origin protection
-    // facilities built into the protocol and the browser.  You should
-    // *always* verify the connection's origin and decide whether or not
-    // to accept it.
     autoAcceptConnections: false
 });
 function generateUUID() { // Public Domain/MIT

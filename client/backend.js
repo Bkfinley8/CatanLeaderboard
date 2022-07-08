@@ -1,7 +1,12 @@
 
 // var wsUri = "ws://localhost:8080"; // Localhost
-var wsUri = "ws://192.168.1.47:8080"; // Max's
-var wsUri = "ws://192.168.56.1:8080"; // Brennan
+// var wsUri = "ws://192.168.1.47:8080"; // Max's
+// console.log(window.location.href);
+// var wsUri = "ws://192.168.56.1:8080"; // Brennan
+
+var url = window.location.href.replace("http://", "");
+var wsUri = "ws://"+url.substring(0, url.indexOf("/"));
+console.log(wsUri)
 
 class BackendConnection {
 	constructor() {

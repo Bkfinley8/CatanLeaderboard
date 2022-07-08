@@ -18,30 +18,29 @@
 		<div id="gameScreen">
 			
 		</div>
-		<!-- Journal Modal -->
-		<div class="modal fade" id="logsModel" tabindex="-1" aria-labelledby="logsModel" aria-hidden="true">
+		<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="rollModal" tabindex="-1" aria-labelledby="rollModal" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-scrollable modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="repairJournalTitle">Repair Journal</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						<h5 class="modal-title" id="rollTitle">Rolling a die</h5>
 					</div>
-					<div class="modal-body" id="logsModelBody">
-						<div id="noLogsLabel" style="display:none;">
-							<p>No information on this repair, how odd.</p>
+					<div class="modal-body">
+						<div id="rollableNumbers">
+							<div id="number2" class="number"><div>2</div><div class="dots" id="dot2"></div></div>
+							<div id="number3" class="number"><div>3</div><div class="dots" id="dot3"></div></div>
+							<div id="number4" class="number"><div>4</div><div class="dots" id="dot4"></div></div>
+							<div id="number5" class="number"><div>5</div><div class="dots" id="dot5"></div></div>
+							<div id="number6" class="number"><div>6</div><div class="dots" id="dot6"></div></div>
+							<div id="number7" class="number"><div>7</div><div class="dots" id="dot7"></div></div>
+							<div id="number8" class="number"><div>8</div><div class="dots" id="dot8"></div></div>
+							<div id="number9" class="number"><div>9</div><div class="dots" id="dot9"></div></div>
+							<div id="number10" class="number"><div>10</div><div class="dots" id="dot10"></div></div>
+							<div id="number11" class="number"><div>11</div><div class="dots" id="dot11"></div></div>
+							<div id="number12" class="number"><div>12</div><div class="dots" id="dot12"></div></div>
 						</div>
-						<table class="table" id="logsTable">
-							<thead>
-								<tr>
-									<th scope="col">Who</th>
-									<th scope="col">When</th>
-									<th scope="col">What</th>
-								</tr>
-								<tbody id="logsTableBody">
-									<!-- Generated in showLogs() -->
-								</tbody>
-							</thead>
-						</table>
+						<div id="rolledNumber">
+
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,5 +1,6 @@
+var myModalAlternative;
 $( document ).ready(function() {
-	
+	myModalAlternative = new bootstrap.Modal('#rollModal');
 });
 function generatePlayerCard(name, color, largest, citys, settlements, roads, knights, hiddenCards, vpCards)
 {
@@ -262,10 +263,95 @@ function removeLargestFromEveryoneExcept(n)
 		}
 	}
 }
+function playerHasLargestRoad(n)
+{
+	var currentLargest = 0;
+	for(var name in playerList)
+	{
+		if(playerList[name].roads>currentLargest && name!=n)
+		{
+			currentLargest = playerList[name].roads;
+		}
+	}
+	return playerList[n].roads > currentLargest && playerList[n].roads>2;
+}
+function removeLargestRoadFromEveryoneExcept(n)
+{
+	for(var name in playerList)
+	{
+		if(n!=name)
+		{
+			playerList[name]["largest"]["army"] = false;
+		}
+	}
+}
 var playerList;
 var ignoring = false;
 var admin;
 var gameStarted = false;
+var rollable = [];
+var numFlashesLeft = 0;
+var flashInterval = 1;
+function showRoll(theNumber)
+{
+	$("#rollableNumbers").hide();
+	$("#rolledNumber").fadeIn();
+	$("#rolledNumber").html("<h1 style='text-align: center'>Rolled "+theNumber+"</h1>");
+}
+function flashNumber()
+{
+	var elements = $(".number");
+	elements.css("background-color", "white");
+	var index = Math.floor(Math.random()*rollable.length);
+	$("#number"+rollable[index]).css("background-color", "#c28cf2");
+	numFlashesLeft--;
+	flashInterval += 8;
+	if(numFlashesLeft<=0)
+	{
+		// clearInterval(flashInterval);
+		var theNumber = rollable[index];
+		removeNumber(parseInt(theNumber));
+		setTimeout(showRoll, 1000, theNumber);
+		setTimeout(stopRolling, 5000);
+	}
+	else
+	{
+		setTimeout(flashNumber, flashInterval);
+	}
+}
+function removeNumber(theNumber)
+{
+	const index = rollable.indexOf(theNumber);
+	if (index > -1) { 
+		rollable.splice(index, 1); 
+	}
+}
+function reroll()
+{
+	rollable = [2,3,3,4,4,4,5,5,5,5,6,6,6,6,6,7,7,7,7,7,7,8,8,8,8,8,9,9,9,9,10,10,10,11,11,12];
+}
+function stopRolling()
+{
+	myModalAlternative.hide();
+}
+function startRolling()
+{
+	$("#rollableNumbers").show();
+	$("#rolledNumber").hide();
+	if(rollable.length==0)
+	{
+		reroll();
+	}
+	$(".dots").text("");
+	for(var i = 0; i < rollable.length; i++)
+	{
+		$("#dot"+rollable[i]).text($("#dot"+rollable[i]).text()+".");
+	}
+	myModalAlternative.show();
+	numFlashesLeft = 30;
+	flashInterval = 5;
+	setTimeout(flashNumber, 300);
+}
 window.api.receive("message", (data) => {
 	console.log(data);
 	var message = JSON.parse(data);
@@ -357,17 +443,41 @@ window.api.receive("message", (data) => {
 	}
 	if(message.request=="addRoad")
 	{
+		var hadLargest = playerHasLargestRoad(message.name) || playerList[message.name]["largest"]["road"];
 		playerList[message.name]["roads"]++;
+		var nowHasLargest = playerHasLargestRoad(message.name);
+		playerList[message.name]["largest"]["road"] = nowHasLargest;//can remove if they lost it
+		if(nowHasLargest && !hadLargest)
+		{
+			removeLargestRoadFromEveryoneExcept(message.name);
+			updateScreen();
+			ignore(2000);
+		}
+		else
+		{
+			updateNumbers();
+		}
 		broadcastFill();
-		updateRoad();
 		// updateScreen();
 		// ignore(2000);
 	}
 	if(message.request=="removeRoad")
 	{
+		var hadLargest = playerHasLargestRoad(message.name) || playerList[message.name]["largest"]["road"];
 		playerList[message.name]["roads"]--;
+		var nowHasLargest = playerHasLargestRoad(message.name);
+		playerList[message.name]["largest"]["road"] = nowHasLargest;//can remove if they lost it
+		if(!nowHasLargest)
+		{
+			removeLargestRoadFromEveryoneExcept("");
+			updateScreen();
+			ignore(2000);
+		}
+		else
+		{
+			updateNumbers();
+		}
 		broadcastFill();
-		updateRoad();
 		// updateScreen();
 		// ignore(2000);
 	}
@@ -398,7 +508,7 @@ window.api.receive("message", (data) => {
 		playerList[message.name]["devCards"]++;
 		var nowHasLargest = playerHasLargestArmy(message.name);
 		playerList[message.name]["largest"]["army"] = nowHasLargest;//can remove if they lost it
-		if(nowHasLargest && !hadLargest)
+		if(!nowHasLargest)
 		{
 			removeLargestFromEveryoneExcept("");
 			updateScreen();
