@@ -68,7 +68,7 @@ wsServer.on('request', function(request) {
     });
     connection.on('close', function(reasonCode, description) {
 		delete connections[session];
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
+        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected. session was '+session);
     });
 });
 
