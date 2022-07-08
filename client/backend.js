@@ -58,7 +58,6 @@ class BackendConnection {
 			//console.log(message.playerDictionary);
 			fill(message.playerDictionary);
 		}
-		
 	}
 
 	onError(evt) {

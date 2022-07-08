@@ -1,6 +1,7 @@
 var myModalAlternative;
 $( document ).ready(function() {
 	myModalAlternative = new bootstrap.Modal('#rollModal');
+	window.api.send("ip", "");
 });
 function generatePlayerCard(name, color, largest, citys, settlements, roads, knights, hiddenCards, vpCards)
 {
@@ -352,6 +353,10 @@ function startRolling()
 	flashInterval = 5;
 	setTimeout(flashNumber, 300);
 }
+window.api.receive("ip", (data) => {
+	// console.log(data);
+	$("#ipLabel").text("Connect to http://"+data+":8080");
+});
 window.api.receive("message", (data) => {
 	console.log(data);
 	var message = JSON.parse(data);
@@ -361,6 +366,7 @@ window.api.receive("message", (data) => {
 	}
 	if(message.request=="startGame")
 	{
+		$("#ipLabel").hide();
 		playerList = {};
 		gameStarted = true;
 		$("#gameScreen").empty();

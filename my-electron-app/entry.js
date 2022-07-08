@@ -9,9 +9,14 @@ var WebSocketServer = require('websocket').server;
 const http = require('http');
 const { connect } = require('http2');
 const { connection } = require('websocket');
+const { networkInterfaces } = require('os');
 
 var server = http.createServer(function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
+    if(request.url=="/")
+    {
+        request.url = "/main.html";
+    }
     fs.promises.readFile("C:/Users/Maxwell/Documents/GitHub/CatanLeaderboard/client"+request.url)
     .then(contents => {
         response.setHeader("Content-Type", "text/html");
@@ -32,6 +37,24 @@ wsServer = new WebSocketServer({
     httpServer: server,
     autoAcceptConnections: false
 });
+function getIP(nameOf)
+{
+	const nets = networkInterfaces();
+	const results = {};
+
+	for (const name of Object.keys(nets)) {
+		for (const net of nets[name]) {
+			const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
+			if (net.family === familyV4Value && !net.internal) {
+				if (!results[name]) {
+					results[name] = [];
+				}
+				results[name].push(net.address);
+			}
+		}
+	}
+    return results[nameOf][0];
+}
 function generateUUID() { // Public Domain/MIT
     var d = new Date().getTime();//Timestamp
     var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
@@ -63,7 +86,7 @@ wsServer.on('request', function(request) {
 		console.log('"'+session+'" -> ' + message.utf8Data);
 		var message = JSON.parse(message.utf8Data);
 		message.session = session;
-		sendBack("message", JSON.stringify(message));
+        sendBack("message", JSON.stringify(message));
 		// if(message.request=="startGame")
 		// {
 		// 	sendBack("fromMainSaveSuc", stringified);
@@ -75,9 +98,6 @@ wsServer.on('request', function(request) {
         console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected. session was '+session);
     });
 });
-
-// var remotePath = "K:/BF/PRSM/TechHub/RepaDex";
-var remotePath = "C:/Users/Maxwell/github/Rapadex";
 
 function sendBack(key, val)
 {
@@ -106,6 +126,10 @@ ipcMain.on("send", (event, args) =>
         connections[message["session"]].send(JSON.stringify(message["message"]));
     }
 	// sendBack("fromMainConfig", "watup");
+});
+ipcMain.on("ip", (event, args) =>
+{
+	sendBack("ip", getIP("Wi-Fi"));
 });
 function createWindow ()
 {
