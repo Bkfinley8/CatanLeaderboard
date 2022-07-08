@@ -581,5 +581,9 @@ window.api.receive("message", (data) => {
 		removeProduceIcon(message.name, message.what);
 		broadcastFill();
 	}
+	if(message.request=="roll")
+	{
+		startRolling();
+	}
 	// $("#updateProgressInside").css("width", data+"%");
 });

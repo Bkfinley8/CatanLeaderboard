@@ -171,4 +171,8 @@ class BackendConnection {
 	{
 		connection.send(JSON.stringify({"request": "playerClicked"}));
 	}
+	roll() 
+	{
+		connection.send(JSON.stringify({"request": "roll"}));
+	}
 }
