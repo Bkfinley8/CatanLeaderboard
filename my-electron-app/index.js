@@ -282,7 +282,7 @@ function removeLargestRoadFromEveryoneExcept(n)
 	{
 		if(n!=name)
 		{
-			playerList[name]["largest"]["army"] = false;
+			playerList[name]["largest"]["road"] = false;
 		}
 	}
 }
@@ -469,10 +469,8 @@ window.api.receive("message", (data) => {
 	}
 	if(message.request=="removeRoad")
 	{
-		var hadLargest = playerHasLargestRoad(message.name) || playerList[message.name]["largest"]["road"];
 		playerList[message.name]["roads"]--;
 		var nowHasLargest = playerHasLargestRoad(message.name);
-		playerList[message.name]["largest"]["road"] = nowHasLargest;//can remove if they lost it
 		if(!nowHasLargest)
 		{
 			removeLargestRoadFromEveryoneExcept("");
